@@ -185,6 +185,57 @@ export function ChatHighlighted() {
   );
 }
 
+export function Transcription() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4 6C4 4.89543 4.89543 4 6 4H18C19.1046 4 20 4.89543 20 6V14C20 15.1046 19.1046 16 18 16H16L13 19V16H6C4.89543 16 4 15.1046 4 14V6ZM6 6V14H13.5858L15 15.4142V14H18V6H6Z"
+        fill="currentColor"
+      />
+      <path
+        d="M7 8H17V9H7V8Z"
+        fill="currentColor"
+      />
+      <path
+        d="M7 10H15V11H7V10Z"
+        fill="currentColor"
+      />
+      <path
+        d="M7 12H13V13H7V12Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function TranscriptionActive() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4 6C4 4.89543 4.89543 4 6 4H18C19.1046 4 20 4.89543 20 6V14C20 15.1046 19.1046 16 18 16H16L13 19V16H6C4.89543 16 4 14V6ZM6 6V14H13.5858L15 15.4142V14H18V6H6Z"
+        fill="#10b981"
+      />
+      <path
+        d="M7 8H17V9H7V8Z"
+        fill="white"
+      />
+      <path
+        d="M7 10H15V11H7V10Z"
+        fill="white"
+      />
+      <path
+        d="M7 12H13V13H7V12Z"
+        fill="white"
+      />
+      <circle cx="19" cy="5" r="3" fill="#10b981" stroke="white" strokeWidth="1"/>
+    </svg>
+  );
+}
+
 export function Arrow() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

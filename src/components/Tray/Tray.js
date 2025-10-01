@@ -10,6 +10,8 @@ import {
 
 import MeetingInformation from '../MeetingInformation/MeetingInformation';
 import Chat from '../Chat/Chat';
+import Captions from '../Captions/Captions';
+import useTranscription from '../../hooks/useTranscription';
 
 import './Tray.css';
 import {
@@ -22,6 +24,8 @@ import {
   Info,
   ChatIcon,
   ChatHighlighted,
+  Transcription,
+  TranscriptionActive,
 } from './Icons';
 
 export default function Tray({ leaveCall }) {
@@ -31,6 +35,14 @@ export default function Tray({ leaveCall }) {
   const [showMeetingInformation, setShowMeetingInformation] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [newChatMessage, setNewChatMessage] = useState(false);
+  const [showCaptions, setShowCaptions] = useState(false);
+
+  const {
+    transcriptionMessages,
+    isTranscriptionActive,
+    isStarting,
+    toggleTranscription,
+  } = useTranscription();
 
   const localSessionId = useLocalSessionId();
   const localVideo = useVideoTrack(localSessionId);
@@ -71,6 +83,17 @@ export default function Tray({ leaveCall }) {
     }
   };
 
+  const toggleCaptions = () => {
+    setShowCaptions(!showCaptions);
+  };
+
+  const handleTranscriptionToggle = () => {
+    toggleTranscription();
+    if (!isTranscriptionActive && !showCaptions) {
+      setShowCaptions(true);
+    }
+  };
+
   return (
     <div className="tray">
       {showMeetingInformation && <MeetingInformation />}
@@ -82,6 +105,12 @@ export default function Tray({ leaveCall }) {
       {/*   We're also passing down the toggleChat() function to the component, so we can open and close the chat */}
       {/*   from the chat UI and not just the Tray. */}
       <Chat showChat={showChat} toggleChat={toggleChat} />
+      <Captions 
+        transcriptionMessages={transcriptionMessages}
+        isTranscriptionActive={isTranscriptionActive}
+        showCaptions={showCaptions}
+        toggleCaptions={toggleCaptions}
+      />
       <div className="tray-buttons-container">
         <div className="controls">
           <button onClick={toggleVideo} type="button">
@@ -105,6 +134,14 @@ export default function Tray({ leaveCall }) {
           <button onClick={toggleChat} type="button">
             {newChatMessage ? <ChatHighlighted /> : <ChatIcon />}
             {showChat ? 'Hide chat' : 'Show chat'}
+          </button>
+          <button 
+            onClick={handleTranscriptionToggle} 
+            type="button"
+            disabled={isStarting}
+          >
+            {isTranscriptionActive ? <TranscriptionActive /> : <Transcription />}
+            {isTranscriptionActive ? 'Stop captions' : 'Start captions'}
           </button>
         </div>
         <div className="leave">

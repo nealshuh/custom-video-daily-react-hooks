@@ -48,3 +48,8 @@
 .leave {
   justify-content: flex-end;
 }
+
+.tray-buttons-container button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
